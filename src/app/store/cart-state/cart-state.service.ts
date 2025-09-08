@@ -1,7 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Product } from '@features/products/product.interface';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject } from 'rxjs';
 import { CartCalculatorService } from 'src/app/store/cart-state/cart-calculator.service';
 
 export interface CartStore {
@@ -18,60 +17,71 @@ export const initialCartState: CartStore = {
 
 @Injectable({ providedIn: 'root' })
 export class CartStateService {
-  private readonly _cartState = new BehaviorSubject<CartStore>(
-    initialCartState
-  );
   private readonly _cartCalculatorService = inject(CartCalculatorService);
   private readonly _toastrService = inject(ToastrService);
 
-  cart$ = this._cartState.asObservable();
+  private readonly _products = signal<Product[]>([]);
 
-  updateState(newState: CartStore): void {
-    this._cartState.next(newState);
-  }
+  private readonly _totalAmount = computed(() =>
+    this._cartCalculatorService.calculateTotal(this._products())
+  );
+  private readonly _productsCount = computed(() =>
+    this._cartCalculatorService.calculateItemsCount(this._products())
+  );
 
-  getCurrentState(): CartStore {
-    return this._cartState.getValue();
-  }
+  readonly cartStore = computed<CartStore>(() => ({
+    products: this._products(),
+    totalAmount: this._totalAmount(),
+    productsCount: this._productsCount(),
+  }));
+
   addToCart(product: Product): void {
-    const currentState = this._cartState.getValue();
-    const updatedProducts = [...currentState.products];
-    const existingProductIndex = updatedProducts.findIndex(
+    const currentProducts = this._products();
+    const existingProductIndex = currentProducts.findIndex(
       (p) => p.id === product.id
     );
     if (existingProductIndex >= 0) {
-      updatedProducts[existingProductIndex] = {
+      currentProducts[existingProductIndex] = {
         ...product,
-        quantity: (updatedProducts[existingProductIndex].quantity || 0) + 1,
+        quantity: (currentProducts[existingProductIndex].quantity || 0) + 1,
       };
+      this._products.set(currentProducts);
     } else {
-      updatedProducts.push({ ...product, quantity: 1 });
+      this._products.update((products: Product[]) => [
+        ...products,
+        { ...product, quantity: 1 },
+      ]);
     }
-    this.updateState({
-      products: updatedProducts,
-      totalAmount: this._cartCalculatorService.calculateTotal(updatedProducts),
-      productsCount:
-        this._cartCalculatorService.calculateItemsCount(updatedProducts),
-    });
     this._toastrService.success('Product added!!', 'DOMINI STORE');
   }
 
   removeFromCart(productId: number): void {
-    const currentState = this._cartState.getValue();
-    const updatedProducts = currentState.products.filter(
-      (p) => p.id !== productId
-    );
-    this.updateState({
-      products: updatedProducts,
-      totalAmount: this._cartCalculatorService.calculateTotal(updatedProducts),
-      productsCount:
-        this._cartCalculatorService.calculateItemsCount(updatedProducts),
-    });
-    this._toastrService.success('Product removed!!', 'DOMINI STORE');
+    try {
+      if (!productId) throw new Error('Invalid product ID');
+      const currentProducts = this._products();
+      const productExists = currentProducts.some(
+        (product: Product) => product.id === productId
+      );
+
+      if (!productExists) {
+        this._toastrService.error('Product not found in cart', 'DOMINI STORE');
+      }
+
+      this._products.update((products: Product[]) =>
+        products.filter((product: Product) => product.id !== productId)
+      );
+      this._toastrService.success('Product removed!', 'DOMINI STORE');
+    } catch (error) {
+      console.error('Error removing product from cart:', error);
+      this._toastrService.error(
+        'An error occurred while removing the product',
+        'DOMINI STORE'
+      );
+    }
   }
 
   clearCart(): void {
-    this.updateState(initialCartState);
+    this._products.set([]);
     this._toastrService.success('All Products removed!', 'DOMINI STORE');
   }
 }
