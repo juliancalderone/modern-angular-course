@@ -1,12 +1,12 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, effect, inject, signal } from '@angular/core';
 import { CategoryService } from '@features/categories/categories.service';
+import { CategoryButtonComponent } from '../category-button/category-button.component';
+import { ProductsService } from '@features/products/products.service';
 
 @Component({
   selector: 'app-category-filter',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [CategoryButtonComponent],
   styleUrl: './category-filter.component.scss',
   template: `
     <h2 class="heading">
@@ -14,33 +14,35 @@ import { CategoryService } from '@features/categories/categories.service';
       categories
     </h2>
     <ul class="list-container">
-      <!-- TODO: Can be an  component -->
       <li>
-        <button type="button" (click)="onClick('all')" class="btn btn-hover">
-          {{ 'ALL' }}
-        </button>
+        <app-category-button
+          [category]="'all'"
+          [(filterCategory)]="selectedCategory"
+        />
       </li>
-      <!-- TODO: Can be an  component -->
-      @for(category of categories$ | async; track category) {
+      @for(category of categories(); track category) {
       <li>
-        <button type="button" (click)="onClick(category)" class="btn btn-hover">
-          {{ category }}
-        </button>
+        <app-category-button
+          [category]="category"
+          [(filterCategory)]="selectedCategory"
+        />
       </li>
       }
     </ul>
   `,
 })
 export class CategoryFilterComponent {
-  readonly categories$ = inject(CategoryService).categories$;
+  readonly categories = inject(CategoryService).categories;
+  private readonly productsService = inject(ProductsService);
 
-  private readonly _router = inject(Router);
+  selectedCategory = signal<string>('all');
 
-  onClick(category: string): void {
-    this._router.navigate([], {
-      queryParams: { category: category === 'all' ? null : category },
-      queryParamsHandling: 'merge',
-      replaceUrl: true,
-    });
+  constructor() {
+    effect(
+      () => {
+        this.productsService.filterProductsByCategory(this.selectedCategory());
+      },
+      { allowSignalWrites: true }
+    );
   }
 }

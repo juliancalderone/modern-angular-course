@@ -2,12 +2,12 @@
   "compilerOptions": {
     "paths": {
       "@api/*": ["src/app/api/*"],
+      "@envs/*": ["src/environments/*"],
       "@features/*": ["src/app/features/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@store/*": ["src/app/store/cart-state/store/*"],
-      "@models/*": ["src/app/models/*"],
       "@layout/*": ["src/app/layout/*"],
-      "@envs/*": ["src/environments/*"]
+      "@models/*": ["src/app/models/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@store/*": ["src/app/store/cart-state/store/*"]
     },
     "rootDir": ".",
     "sourceMap": true,

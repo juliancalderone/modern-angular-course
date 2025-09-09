@@ -1,0 +1,7 @@
+.btn {
+  @apply bg-primary-default text-base font-medium px-6 capitalize py-2 rounded-md flex items-center gap-2 text-white ease-linear duration-300;
+
+  &-hover {
+    @apply hover:bg-primary-dark;
+  }
+}
