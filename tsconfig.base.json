@@ -22,11 +22,11 @@
       "@models/*": ["apps/angular-moderno-udemy/src/app/models/*"],
       "@shared/*": ["apps/angular-moderno-udemy/src/app/shared/*"],
       "@store/*": ["apps/angular-moderno-udemy/src/app/store/*"],
-      "dominicode/api": ["libs/api/src/index.ts"],
-      "dominicode/ui": ["libs/shared/ui/src/index.ts"],
-      "dominicode/ui/add-to-cart": ["libs/shared/ui/add-to-cart/src/index.ts"],
-      "dominicode/ui/footer": ["libs/shared/ui/footer/src/index.ts"],
-      "dominicode/ui/header": ["libs/shared/ui/header/src/index.ts"]
+      "@dominicode/api": ["libs/api/src/index.ts"],
+      "@dominicode/ui": ["libs/shared/ui/src/index.ts"],
+      "@dominicode/ui/add-to-cart": ["libs/shared/ui/add-to-cart/src/index.ts"],
+      "@dominicode/ui/footer": ["libs/shared/ui/footer/src/index.ts"],
+      "@dominicode/ui/header": ["libs/shared/ui/header/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

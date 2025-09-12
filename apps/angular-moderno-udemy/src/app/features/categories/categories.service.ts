@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { APIService } from '@api/api.service';
+import { APIService } from '@dominicode/api';
 import { environment } from '@envs/environment';
 import { tap } from 'rxjs';
 
