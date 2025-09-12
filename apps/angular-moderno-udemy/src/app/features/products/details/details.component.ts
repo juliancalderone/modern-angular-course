@@ -4,7 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from '@features/products/product.interface';
 import { ProductsService } from '@features/products/products.service';
-import { CartStateService } from 'src/app/store/cart-state/cart-state.service';
+import { CartStateService } from '@store/cart-state/cart-state.service';
 
 import { STAR_SVG } from '@shared/constants/star-svg.constants';
 import { AddToCartComponent } from '@shared/ui/add-to-cart/add-to-cart.component';

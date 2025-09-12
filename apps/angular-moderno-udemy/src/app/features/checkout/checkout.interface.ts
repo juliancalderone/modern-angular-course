@@ -1,5 +1,5 @@
 import { Signal } from '@angular/core';
-import { CartStore } from 'src/app/store/cart-state/cart-state.service';
+import { CartStore } from '@store/cart-state/cart-state.service';
 
 export const PaymentStatus_COMPLETED = 'COMPLETED';
 export const PaymentStatus_FAILED = 'FAILED';

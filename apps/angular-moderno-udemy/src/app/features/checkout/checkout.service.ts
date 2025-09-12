@@ -3,7 +3,7 @@ import {
   PaymentProcessor,
   PaymentResult,
 } from '@features/checkout/checkout.interface';
-import { CartStore } from 'src/app/store/cart-state/cart-state.service';
+import { CartStore } from '@store/cart-state/cart-state.service';
 
 @Injectable({ providedIn: 'root' })
 export class CheckoutService implements PaymentProcessor {

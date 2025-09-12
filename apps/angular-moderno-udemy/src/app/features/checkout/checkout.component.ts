@@ -1,9 +1,9 @@
 import { CurrencyPipe, SlicePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CheckoutService } from '@features/checkout/checkout.service';
-import { CartStateService } from 'src/app/store/cart-state/cart-state.service';
 
 import { RemoveProductComponent } from '@shared/ui/remove/remove-product.component';
+import { CartStateService } from '@store/cart-state/cart-state.service';
 
 @Component({
   selector: 'app-checkout',

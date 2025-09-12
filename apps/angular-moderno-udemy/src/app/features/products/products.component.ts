@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CartStateService } from 'src/app/store/cart-state/cart-state.service';
+import { CartStateService } from '@store/cart-state/cart-state.service';
 
 import { CardComponent } from '@features/products/card/card.component';
 import { Product } from '@features/products/product.interface';

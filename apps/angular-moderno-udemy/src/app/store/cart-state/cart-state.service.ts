@@ -1,8 +1,8 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Product } from '@features/products/product.interface';
 import { ToastrService } from 'ngx-toastr';
-import { CartCalculatorService } from 'src/app/store/cart-state/cart-calculator.service';
 import { CartStorageService } from './cart-storage.service';
+import { CartCalculatorService } from './cart-calculator.service';
 
 export interface CartStore {
   products: Product[];

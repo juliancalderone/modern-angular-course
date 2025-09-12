@@ -5,8 +5,8 @@ import { FooterComponent } from '@layout/footer/footer.component';
 import { HeaderComponent } from '@layout/header/header.component';
 import HeroComponent from '@layout/hero/hero.component';
 import { SpinnerComponent } from '@shared/ui/spinner/spinner.component';
+import { CartStateService } from '@store/cart-state/cart-state.service';
 import { filter } from 'rxjs';
-import { CartStateService } from 'src/app/store/cart-state/cart-state.service';
 
 @Component({
   standalone: true,

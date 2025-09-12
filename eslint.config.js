@@ -14,7 +14,16 @@ module.exports = [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
+          allow: [
+            '^@store/.*$',
+            '^@features/.*$',
+            '^@layout/.*$',
+            '^@models/.*$',
+            '^@shared/.*$',
+            '^@api/.*$',
+            '^@envs/.*$',
+            '^.*/eslint(\\.base)?\\.config\\.[cm]?js$',
+          ],
           depConstraints: [
             {
               sourceTag: '*',

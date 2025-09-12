@@ -15,13 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@api/*": ["src/app/api/*"],
-      "@envs/*": ["src/environments/*"],
-      "@features/*": ["src/app/features/*"],
-      "@layout/*": ["src/app/layout/*"],
-      "@models/*": ["src/app/models/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@store/*": ["src/app/store/cart-state/store/*"]
+      "@api/*": ["apps/angular-moderno-udemy/src/app/api/*"],
+      "@envs/*": ["apps/angular-moderno-udemy/src/environments/*"],
+      "@features/*": ["apps/angular-moderno-udemy/src/app/features/*"],
+      "@layout/*": ["apps/angular-moderno-udemy/src/app/layout/*"],
+      "@models/*": ["apps/angular-moderno-udemy/src/app/models/*"],
+      "@shared/*": ["apps/angular-moderno-udemy/src/app/shared/*"],
+      "@store/*": ["apps/angular-moderno-udemy/src/app/store/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
