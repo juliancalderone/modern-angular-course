@@ -8,7 +8,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { Product } from '@features/products/product.interface';
 
-import { AddToCartComponent } from '@shared/ui/add-to-cart/add-to-cart.component';
+import { AddToCartComponent } from '@dominicode/ui/add-to-cart';
 
 @Component({
   selector: 'app-card',

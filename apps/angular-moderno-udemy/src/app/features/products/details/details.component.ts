@@ -7,7 +7,7 @@ import { ProductsService } from '@features/products/products.service';
 import { CartStateService } from '@store/cart-state/cart-state.service';
 
 import { STAR_SVG } from '@shared/constants/star-svg.constants';
-import { AddToCartComponent } from '@shared/ui/add-to-cart/add-to-cart.component';
+import { AddToCartComponent } from '@dominicode/ui/add-to-cart';
 
 @Component({
   selector: 'app-details',
