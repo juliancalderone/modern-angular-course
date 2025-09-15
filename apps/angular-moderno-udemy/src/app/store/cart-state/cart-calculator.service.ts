@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-interface CartItem {
+export interface CartItem {
   price: number | string;
   quantity?: number;
 }
